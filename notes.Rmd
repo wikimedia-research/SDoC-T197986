@@ -1,7 +1,7 @@
 ---
 title: "T197986"
 description: | 
-  Notes on quantifying the state of Wikidata incompleteness
+  Report on the state of Wikidata incompleteness
 output:
   html_notebook:
     theme: readable
@@ -57,7 +57,7 @@ suppressMessages({
 })
 ```
 
-This project (tracked in [T197986](https://phabricator.wikimedia.org/T197986)) is about quantifying the state of incompleteness of Q-items on Wikidata. Unfortunately the question of inconsistency is an enormous research project and quantifying it would require concrete (and automatable) definition. It is also outside of the ability of this report's author ([Mikhail Popov](https://meta.wikimedia.org/wiki/User:MPopov_(WMF))) and the scope of the [Wikimedia Audiences Product Analytics team](https://mediawiki.com/wiki/Product_Analytics).
+This project (tracked in [T197986](https://phabricator.wikimedia.org/T197986)) is about quantifying the state of incompleteness of Q-items on Wikidata. Unfortunately the question of inconsistency is an enormous research project and quantifying it would require concrete (and automatable) definition. It is also outside of the ability of this report's author ([Mikhail Popov](https://meta.wikimedia.org/wiki/User:MPopov_(WMF))) and the scope of the [Wikimedia Audiences Product Analytics team](https://mediawiki.com/wiki/Product_Analytics). The code, queries, and data are available in [the corresponding repository on GitHub](https://github.com/wikimedia-research/SDoC-T197986).
 
 **Disclaimer**: in order to facilitate the analysis, the data was limited to English labels/descriptions/aliases/taxon common names. Due to the prevalence of English on Wikidata, it could be safe to assume that however bad the statistics look in English, they look much worse in other languages.
 
