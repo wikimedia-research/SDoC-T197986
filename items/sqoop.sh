@@ -17,24 +17,22 @@
 hdfs dfs -cp /user/goransm/mysql-analytics-research-client-pw.txt /user/bearloga/mysql-analytics-research-client-pw.txt
 # 2. Try connecting on stat1004:
 sqoop list-tables  --password-file /user/bearloga/mysql-analytics-research-client-pw.txt --username research --connect jdbc:mysql://analytics-store.eqiad.wmnet/wikidatawiki
-# 3. Setup directory on HDFS:
-hdfs dfs -mkdir /user/bearloga/mediawiki_sqoop
 
 # 3. Cleanup any attempts:
-hive -e "USE bearloga; DROP TABLE IF EXISTS wb_item_terms;"
+hive -e "USE bearloga; DROP TABLE IF EXISTS wb_terms;"
 
-# 4. Sqoop English terms with 8 parallel workers to speed up the process
+# 4. Sqoop English terms with 4 parallel workers to speed up the process
 sqoop import --connect jdbc:mysql://analytics-store.eqiad.wmnet/wikidatawiki -m 4 \
   --password-file /user/bearloga/mysql-analytics-research-client-pw.txt \
   --username research \
-  --query 'SELECT term_row_id, term_entity_id, term_full_entity_id, term_entity_type, term_type, term_language, term_text FROM wb_terms WHERE $CONDITIONS AND term_entity_type = "item" AND term_type IN("alias", "label", "description") AND term_language = "en"' \
+  --query 'SELECT * FROM wb_terms WHERE $CONDITIONS' \
   --split-by term_row_id \
   --as-avrodatafile \
-  --target-dir /tmp/wb_item_terms \
+  --target-dir /tmp/wb_terms \
   --delete-target-dir
 
 # 5. Import sqoop'd data into Hive:
-hive -f wb_item_terms.hql
+hive -f ~/tmp/wb_terms.hql
 
 # 6. Repair table:
-hive -e "USE bearloga; SET hive.mapred.mode = nonstrict; MSCK REPAIR TABLE wb_item_terms;"
+hive -e "USE bearloga; SET hive.mapred.mode = nonstrict; MSCK REPAIR TABLE wb_terms;"

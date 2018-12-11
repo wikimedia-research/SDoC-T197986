@@ -1,7 +1,7 @@
 ---
 title: "T197986"
 description: | 
-  Notes on quantifying the state of Wikidata incompleteness and inconsistency
+  Notes on quantifying the state of Wikidata incompleteness
 output:
   html_notebook:
     theme: readable
@@ -10,7 +10,7 @@ editor_options:
   chunk_output_type: inline
 ---
 
-```{r setup, echo=FALSE}
+```{r setup}
 suppressPackageStartupMessages({
   library(magrittr)
   library(tidyverse)
@@ -49,7 +49,7 @@ make_mini_table <- function(x) {
     column_spec(1, width = "100px")
 }
 ```
-```{r data, echo=FALSE}
+```{r data}
 suppressMessages({
   examples <- read_tsv("data/example.tsv")
   taxons <- read_rds("data/wikidata_taxons_refined.rds")
@@ -57,9 +57,13 @@ suppressMessages({
 })
 ```
 
-This project (tracked in [T197986](https://phabricator.wikimedia.org/T197986)) is about quantifying the state of inconsistency and incompleteness of Q-items on Wikidata. The following are examples which were highlighted in the deck [Wikidata completeness and quality issues](https://docs.google.com/presentation/d/1dANu94y9AA16t6fN_i_hagqlsdI92qMmezhIb14F-bo/edit?usp=sharing):
+This project (tracked in [T197986](https://phabricator.wikimedia.org/T197986)) is about quantifying the state of incompleteness of Q-items on Wikidata. Unfortunately the question of inconsistency is an enormous research project and quantifying it would require concrete (and automatable) definition. It is also outside of the ability of this report's author ([Mikhail Popov](https://meta.wikimedia.org/wiki/User:MPopov_(WMF))) and the scope of the [Wikimedia Audiences Product Analytics team](https://mediawiki.com/wiki/Product_Analytics).
 
-```{r examples, echo=FALSE}
+**Disclaimer**: in order to facilitate the analysis, the data was limited to English labels/descriptions/aliases/taxon common names. Due to the prevalence of English on Wikidata, it could be safe to assume that however bad the statistics look in English, they look much worse in other languages.
+
+The following are examples which were highlighted in the deck [Wikidata completeness and quality issues](https://docs.google.com/presentation/d/1dANu94y9AA16t6fN_i_hagqlsdI92qMmezhIb14F-bo/edit?usp=sharing):
+
+```{r examples}
 formatted_examples <- examples %>%
   mutate(entity = wikidata_link(entity),
          description = ifelse(is.na(description), "—", description),
@@ -143,7 +147,7 @@ SELECT (COUNT(?item) AS ?n_taxons) WHERE {
   ?item wdt:P31 wd:Q16521.
 }
 ```
-```{r n_taxons, message=FALSE, cache=TRUE, echo=FALSE}
+```{r n_taxons, message=FALSE, cache=TRUE}
 today <- lubridate::today()
 n_taxons <- query_wikidata("SELECT (COUNT(?item) AS ?n_taxons) WHERE { ?item wdt:P31 wd:Q16521.}")$n_taxons
 ```
@@ -160,24 +164,18 @@ SELECT (COUNT(?item) AS ?n_taxons) WHERE {
 }
 ```
 
-Let's take a look at a few taxons to get a sense of what data they may have:
+Let's take a look at a few taxons to get a sense of what data they may have available:
 
-```{r example_taxons, echo=FALSE}
-extract_en_info_field <- function(info_list, field) {
-  if (!"en" %in% names(info_list)) return(NA)
-  else return(info_list$en[[field]])
-}
+```{r example_taxons}
 taxons %>%
-  filter(entity %in% c("Q28319", "Q311230", "Q1000270", "Q1034859", "Q1035244", "Q25327", "Q29995")) %>%
+  filter(entity %in% c("Q28319", "Q311230", "Q1000270", "Q59392949", "Q1034859", "Q1035244", "Q25327", "Q29995", "Q1010571")) %>%
   arrange(desc(entity)) %>%
   mutate(
-    label = map_chr(info, extract_en_info_field, field = "label"),
-    label = ifelse(is.na(label), "—", label),
-    description = map_chr(info, extract_en_info_field, field = "description"),
-    description = ifelse(is.na(description), "—", description),
+    label = ifelse(is.na(sqoop_label), "—", sqoop_label),
+    description = ifelse(is.na(sqoop_description), "—", sqoop_description),
     item = sprintf("%s (%s)", label, wikidata_link(entity)),
-    aliases = map_chr(en_aliases, maybe_make_list),
-    taxon_common_names = map_chr(en_taxon_common_names, maybe_make_list)
+    aliases = map_chr(query_aliases, maybe_make_list),
+    taxon_common_names = map_chr(query_taxon_common_names, maybe_make_list)
   ) %>%
   select(item, description, aliases, taxon_common_names) %>%
   kable(escape = FALSE, caption = "Taxons on Wikidata",
@@ -185,39 +183,80 @@ taxons %>%
   kable_styling()
 ```
 
-When the items are indexed, the index includes labels (if any), descriptions (if any), aliases (if any), and any values of statements which are plain text or Q-items. So if an item is, say, a person who is an instance of (P31) of human (Q5), then their index includes "P31=Q5" but *not* that they're a "human". However, if the value is plain text (e.g. taxon common name), then that gets included in the index and can be searched for. For example, Wikimedia Foundation, Inc. ([Q180](https://www.wikidata.org/wiki/Q180)) has a statement for property "
-IPv4 routing prefix" ([P3761](https://www.wikidata.org/wiki/Property:P3761)) so if one does a [full-text search for "198.35.26.0/23"](https://www.wikidata.org/w/index.php?search=198.35.26.0%2F23&title=Special%3ASearch&fulltext=1) (the value currently in that statement), WMF is the first result listed.
+When the items are indexed, the index includes labels (if any), descriptions (if any), aliases (if any), and any values of statements which are plain text or Q-items. So if an item is, say, a person who is an instance of (P31) of human (Q5), then their index includes "P31=Q5" but *not* that they're a "human". However, if the value is plain text (e.g. taxon common name), then that gets included in the index and can be searched for. For example, Wikimedia Foundation, Inc. ([Q180](https://www.wikidata.org/wiki/Q180)) has a statement for property "IPv4 routing prefix" ([P3761](https://www.wikidata.org/wiki/Property:P3761)) so if one does a [full-text search for "198.35.26.0/23"](https://www.wikidata.org/w/index.php?search=198.35.26.0%2F23&title=Special%3ASearch&fulltext=1) (the value currently in that statement), WMF is the first result listed.
 
-So one way to assess the searchability of taxons on Wikidata is to assess how many have lebels, descriptions, aliases, and taxon common names ([P1843](https://www.wikidata.org/wiki/Property:P1843)). Among `r nrow(taxons)` taxons, we have following missingness statistics:
+So one way to assess the searchability of taxons on Wikidata is to assess how many have lebels, descriptions, aliases, and taxon common names ([P1843](https://www.wikidata.org/wiki/Property:P1843)). Among the `r prettyNum(nrow(taxons), ",")` collected taxons, we have following completeness statistics:
 
-```{r, echo=FALSE}
+```{r taxon_completeness}
 taxon_completeness <- taxons %>%
-  select(en_aliases, en_taxon_common_names, info) %>%
+  select(entity, sqoop_label, sqoop_description, query_aliases, query_taxon_common_names) %>%
   transmute(
-    `alias(es)` = !is.na(en_aliases),
-    `taxon common name(s)` = !is.na(en_taxon_common_names),
-    label = map_lgl(map(info, flatten), ~ !is.na(.x$label)),
-    description = map_lgl(map(info, flatten), ~ !is.na(.x$description)),
+    item = entity,
+    `alias(es)` = !map_lgl(query_aliases, ~ all(is.na(.x))),
+    `taxon common name(s)` = !map_lgl(query_taxon_common_names, ~ all(is.na(.x))),
+    label = !is.na(sqoop_label),
+    description = !is.na(sqoop_description),
   ) %>%
-  gather(has, val) %>%
+  gather(has, val, -item) %>%
+  arrange(item, has, val)
+```
+
+```{r completeness_combinations}
+taxon_completeness %>%
+  filter(val) %>%
+  group_by(item) %>%
+  summarize(n_has = n(), has = paste0(has, collapse = ", ")) %>%
+  count(n_has, has) %>%
+  arrange(desc(n)) %>%
+  mutate(prop = sprintf("%.3f%%", 100 * n / sum(n))) %>%
+  kable(escape = FALSE, caption = "English info completeness of taxons on Wikidata",
+        col.names = c("Fields available for a taxon", "Info available (in English)", "Items in dataset", "Proportion of dataset")) %>%
+  kable_styling()
+```
+
+And, conversely, the following missingness statistics:
+
+```{r missingness_combinations}
+taxon_completeness %>%
+  filter(!val) %>%
+  group_by(item) %>%
+  summarize(n_has = n(), has = paste0(has, collapse = ", ")) %>%
+  count(n_has, has) %>%
+  arrange(desc(n)) %>%
+  mutate(prop = sprintf("%.3f%%", 100 * n / sum(n))) %>%
+  kable(escape = FALSE, caption = "English info missingness of taxons on Wikidata",
+        col.names = c("Fields NOT available for a taxon", "Info NOT available (in English)", "Items in dataset", "Proportion of dataset")) %>%
+  kable_styling()
+```
+
+Those are *combinations* of missing fields. The following are per-field completeness & missingness statistics:
+
+```{r info_completeness}
+info_completeness <- taxon_completeness %>%
   group_by(has) %>%
   summarize(n = sum(val), total = n())
-taxon_completeness_n <- set_names(taxon_completeness$n, taxon_completeness$has)
-taxon_completeness %>%
-  transmute(has = has, prop = sprintf("%s (%.1f%%)", compress(n), 100 * n / total)) %>%
-  kable(col.names = c("Information a taxon item may have", "How many have a value (in English)"),
+info_completeness_n <- set_names(info_completeness$n, info_completeness$has)
+info_completeness %>%
+  transmute(has = has,
+            prop1 = sprintf("%s (%.3f%%)", compress(n), 100 * n / total),
+            prop2 = sprintf("%s (%.3f%%)", compress(total - n), 100 * (total - n) / total)) %>%
+  kable(col.names = c("Information a taxon item may have", "How many have a value (in English)", "How many do NOT have a value (in English)"),
         caption = sprintf("English completeness of items among a subset of %s taxons", compress(nrow(taxons))),
-        align = c("l", "r")) %>%
+        align = c("l", "r", "r")) %>%
   kable_styling("striped")
 ```
 
-Again, these numbers are *not* representative of all `r compress(n_taxons)` taxons. As a reminder, the dataset of `r compress(nrow(taxons))` taxons studied was limited to those which had (1) at least one English alias or (2) at least one English taxon common name. It's not clear how many taxons on Wikidata do have a description or a label, but we can at least say that of `r compress(n_taxons)`, only `r compress( taxon_completeness_n["alias(es)"])` (`r sprintf("%.2f%%", 100 * taxon_completeness_n["alias(es)"] / n_taxons)`) taxons have at least one alias in English and only `r compress(taxon_completeness_n["taxon common name(s)"])` (`r sprintf("%.2f%%", 100 * taxon_completeness_n["taxon common name(s)"] / n_taxons)`) taxons have at least one taxon common name in English.
+Considering that the collected dataset *only* included taxons which had at least one alias or at least one taxon common name, the missingness of those two items -- both of which aid a lot in search -- is rather concerning.
 
-**Note**: The next iteration of this work should include all languages. We restricted this initial exploration to English as that is the analyst's primary language.
+Again, these numbers are *not* representative of all `r compress(n_taxons)` taxons. As a reminder, the dataset of `r compress(nrow(taxons))` taxons studied was limited to those which had (1) at least one English alias or (2) at least one English taxon common name. It's not clear how many taxons on Wikidata do have a description or a label, but we can at least say that of `r compress(n_taxons)`, only `r compress( info_completeness_n["alias(es)"])` (`r sprintf("%.3f%%", 100 * info_completeness_n["alias(es)"] / n_taxons)`) taxons have at least one alias in English and only `r compress(info_completeness_n["taxon common name(s)"])` (`r sprintf("%.3f%%", 100 * info_completeness_n["taxon common name(s)"] / n_taxons)`) taxons have at least one taxon common name in English.
+
+**Note**: A follow-up of this work should include all languages. We restricted this initial exploration to English as that is the analyst's primary language.
 
 ## Groups of organisms known by one particular common name
 
-```{r example_commons, echo=FALSE}
+An item may also be an instance of "groups of organisms known by one particular common name" ([Q55983715](https://www.wikidata.org/wiki/Q55983715)). The following are some examples of such items:
+
+```{r example_commons}
 commons %>%
   filter(item %in% c("Q5", "Q11946202", "Q3469592", "Q11065036", "Q17128757")) %>%
   arrange(desc(item)) %>%
@@ -238,7 +277,9 @@ commons %>%
   column_spec(2, width = "150px")
 ```
 
-```{r, echo=FALSE}
+Similar the work on taxons, we can calculate some completeness statistics on these items. Although unlike the case with taxons, these (English-focused) statistics apply to *all* instances found on Wikidata.
+
+```{r}
 commons %>%
   transmute(
     label = !is.na(label),
@@ -256,4 +297,29 @@ commons %>%
         align = c("l", "r")) %>%
   kable_styling("striped") %>%
   group_rows(index = c("Indexed for search as text" = 3, "Indexed for search as statement_keywords" = 2))
+```
+
+As before, we can also look at combinations of missing fields to determine how many items would be easily found by searching (e.g. an item which has a label, a description, and an alias would be more likely to be found by someone looking for it than an item with only, say, a label):
+
+```{r}
+commons %>%
+  transmute(
+    item = item,
+    label = !is.na(label),
+    description = !is.na(description),
+    `alias(es)` = map_int(aliases, ~ sum(!is.na(.x))) > 0,
+    `at least one "of" qualifier` = map_int(groups, ~ sum(!is.na(.x[[1]]$item))) > 0,
+    `at least one "different from" statement` = map_int(different_from, ~ sum(!is.na(.x[[1]]$item))) > 0
+  ) %>%
+  gather(has, val, -item) %>%
+  mutate(has = factor(has, c("label", "description", "alias(es)", "at least one \"of\" qualifier", "at least one \"different from\" statement"))) %>%
+  filter(val) %>%
+  group_by(item) %>%
+  summarize(n_has = n(), has = paste0(has, collapse = ", ")) %>%
+  count(n_has, has) %>%
+  arrange(desc(n)) %>%
+  mutate(prop = sprintf("%.2f%%", 100 * n / sum(n))) %>%
+  kable(escape = FALSE, caption = "English information completeness of 'group of organisms known by one particular common name' instances on Wikidata",
+        col.names = c("Fields available for an item", "Info available (in English)", "Items in dataset", "Proportion of dataset")) %>%
+  kable_styling()
 ```

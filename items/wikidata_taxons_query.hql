@@ -17,20 +17,23 @@ WITH wd_aliases AS (
   FROM wd_aliases
   FULL OUTER JOIN wd_tcns ON wd_aliases.entity = wd_tcns.entity
 ), wd_taxon_terms AS (
-  SELECT entity, term_type, term_language, term_text
+  SELECT entity, term_type, term_text
   FROM wd_taxons
-  LEFT JOIN wb_item_terms ON wd_taxons.entity = wb_item_terms.term_full_entity_id
+  LEFT JOIN wb_terms ON (
+    wd_taxons.entity = wb_terms.term_full_entity_id
+    AND wb_terms.term_language = 'en'
+    AND wb_terms.term_entity_type = 'item'
+  )
 ), wd_taxon_collected AS (
   SELECT
-    entity, term_type, term_language,
+    entity, term_type,
     CONCAT_WS(', ', COLLECT_SET(DISTINCT(term_text))) AS term_texts
   FROM wd_taxon_terms
-  GROUP BY entity, term_type, term_language
+  GROUP BY entity, term_type
 )
 SELECT
   wd_taxon_collected.entity AS entity,
   term_type,
-  term_language,
   term_texts,
   aliases,
   tcns

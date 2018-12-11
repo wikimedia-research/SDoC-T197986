@@ -92,7 +92,6 @@ WHERE
   ?taxon wdt:P1843 ?taxonCommonName.
   FILTER (LANG(?taxonCommonName) = 'en')
 }
-GROUP BY ?taxon ?label
 "
 taxons_query_aliases <- "SELECT ?taxon ?alias
 WHERE
@@ -123,45 +122,28 @@ wikidata_taxons$aliases %>%
 #          scp items/wikidata_taxons_load.hql stat4:/home/bearloga/tmp/
 # On stat1004: hive -f ~/tmp/wikidata_taxons_load.hql
 
-# Joining sqoop'd wb_item_terms with wikidata_ta (aliases) & wikidata_tcn (taxon common names):
+# Joining sqoop'd wb_terms with wikidata_ta (aliases) & wikidata_tcn (taxon common names):
 # On stat1004:
 # > cd ~/tmp
-# > export HADOOP_HEAPSIZE=1024 && hive -S -f wikidata_taxons_query.hql 2> /dev/null | grep -v JAVA_TOOL_OPTIONS | grep -v parquet.hadoop | grep -v WARN: | grep -v :WARN > wikidata_taxons.tsv
+# > export HADOOP_HEAPSIZE=1024 && nice ionice hive -S -f wikidata_taxons_query.hql 2> /dev/null | grep -v JAVA_TOOL_OPTIONS | grep -v parquet.hadoop | grep -v WARN: | grep -v :WARN > wikidata_taxons.tsv
 # Locally: scp stat4:/home/bearloga/tmp/wikidata_taxons.tsv data/
-wikidata_taxons <- read.delim("data/wikidata_taxons.tsv", sep = "\t", quote = "", as.is = TRUE, header = TRUE, stringsAsFactors = FALSE, na.strings = c("", "NA", "NULL"))
+word2vec <- function(x) {
+  return(strsplit(x, ", ")[[1]])
+}
+
+wikidata_taxons <- read.delim("data/wikidata_taxons.tsv.gz", sep = "\t", quote = "", as.is = TRUE, header = TRUE, stringsAsFactors = FALSE, na.strings = c("", "NA", "NULL"))
 wikidata_taxons %<>%
   tidyr::spread(term_type, term_texts, fill = NA) %>%
   dplyr::select(-`<NA>`) %>%
-  dplyr::rename(language = term_language) %>%
-  dplyr::filter(entity != "entity")
-
-# dplyr::mutate(temp = purrr::pmap(list(group = group, label = groupLabel), foo)) %>%
-  # dplyr::group_by(item) %>%
-  # dplyr::summarize(groups = list(purrr::reduce(temp, c)))
-
-char_na <- function(x) {
-  if (is.na(x)) {
-    return("NA")
-  } else {
-    return(x)
-  }
-}
-
-wikidata_taxons %<>%
-  # dplyr::filter(entity %in% c("Q1000370", "Q1006071")) %>%
-  dplyr::mutate(temp = purrr::pmap(list(language = language, alias = strsplit(alias, ", "), description = description, label = label), foo)) %>%
-  dplyr::mutate(temp = purrr::map(temp, ~ set_names(list(.x[[1]][-1]), char_na(.x[[1]][1])))) %>%
-  dplyr::group_by(entity) %>%
-  dplyr::summarize(
-    en_aliases = strsplit(head(aliases, 1), ", "),
-    n_aliases = length(en_aliases[[1]]),
-    n_unique_aliases = length(unique(tolower(en_aliases[[1]]))),
-    en_taxon_common_names = strsplit(head(tcns, 1), ", "),
-    n_taxon_common_names = length(en_taxon_common_names[[1]]),
-    n_unique_taxon_common_names = length(unique(tolower(en_taxon_common_names[[1]]))),
-    info = list(purrr::reduce(temp, c)),
-    has_en_info = "en" %in% names(info[[1]])
-  )
+  dplyr::filter(entity != "entity") %>%
+  dplyr::mutate(
+    query_aliases = purrr::map(aliases, word2vec),
+    query_taxon_common_names = purrr::map(tcns, word2vec),
+    sqoop_aliases = purrr::map(alias, word2vec),
+    sqoop_label = purrr::map(label, word2vec)
+  ) %>%
+  dplyr::select(-c(alias, aliases, tcns, label)) %>%
+  dplyr::rename(sqoop_description = description)
 
 readr::write_rds(wikidata_taxons, "data/wikidata_taxons_refined.rds", compress = "gz")
 
