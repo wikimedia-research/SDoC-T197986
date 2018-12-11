@@ -1,0 +1,30 @@
+example	entity	label	language	description	instance_of	instance_of_label	taxon_common_name	alias	group	group_label
+1	Q311230	Epiphyllum oxypetalum	en	species of plant	Q16521	taxon	Dutchman's pipe cactus	NA	NA	NA
+1	Q311230	Epiphyllum oxypetalum	en	species of plant	Q16521	taxon	Dutchman's Pipe Cactus	NA	NA	NA
+1	Q311230	Epiphyllum oxypetalum	es	especie de planta	Q16521	taxon	Nopalillo Criollo	Phyllocactus oxypetalus	NA	NA
+1	Q311230	Epiphyllum oxypetalum	es	especie de planta	Q16521	taxon	Nopalillo Criollo	Phyllocactus grandis	NA	NA
+1	Q311230	Epiphyllum oxypetalum	es	especie de planta	Q16521	taxon	Nopalillo Criollo	Epiphyllum latifrons	NA	NA
+1	Q311230	Epiphyllum oxypetalum	es	especie de planta	Q16521	taxon	Nopalillo Criollo	Epiphyllum grande	NA	NA
+1	Q311230	Epiphyllum oxypetalum	es	especie de planta	Q16521	taxon	Nopalillo Criollo	Epiphyllum acuminatum	NA	NA
+1	Q311230	Epiphyllum oxypetalum	es	especie de planta	Q16521	taxon	Nopalillo Criollo	Cereus latifrons	NA	NA
+1	Q311230	Epiphyllum oxypetalum	es	especie de planta	Q16521	taxon	Nopalillo Criollo	Cereus oxypetalus	NA	NA
+2	Q11946202	butterfly	en	insect of the order Lepidoptera	Q55983715	group of organisms known by one particular common name	NA	Rhopalocera	Q28319	Lepidoptera
+2	Q11946202	Rhopalocera	es	clado obsoleto de insectos del orden Lepidoptera	Q55983715	group of organisms known by one particular common name	NA	ropalócero	Q28319	lepidópteros
+2	Q11946202	Rhopalocera	es	clado obsoleto de insectos del orden Lepidoptera	Q55983715	group of organisms known by one particular common name	NA	ropalocero	Q28319	lepidópteros
+2	Q11946202	Rhopalocera	es	clado obsoleto de insectos del orden Lepidoptera	Q55983715	group of organisms known by one particular common name	NA	mariposas diurnas	Q28319	lepidópteros
+3	Q28319	Lepidoptera	en	order of insects that includes butterflies and moths	Q16521	taxon	Butterflies and Moths	lepidopterans	NA	NA
+3	Q28319	lepidópteros	es	orden de insectos holometábolos	Q16521	taxon	NA	mariposas	NA	NA
+3	Q28319	lepidópteros	es	orden de insectos holometábolos	Q16521	taxon	NA	lepidopteros	NA	NA
+3	Q28319	lepidópteros	es	orden de insectos holometábolos	Q16521	taxon	NA	lepidoptero	NA	NA
+3	Q28319	lepidópteros	es	orden de insectos holometábolos	Q16521	taxon	NA	Lepidoptera	NA	NA
+3	Q28319	lepidópteros	es	orden de insectos holometábolos	Q16521	taxon	NA	lepidóptero	NA	NA
+3	Q28319	lepidópteros	es	orden de insectos holometábolos	Q16521	taxon	NA	mariposa	NA	NA
+4	Q3469592	salamander	en	animal	Q55983715	group of organisms known by one particular common name	NA	NA	Q319469	Salamandridae
+5	Q319469	Salamandridae	en	family of amphibians	Q16521	taxon	NA	NA	NA	NA
+5	Q319469	Salamandridae	es	NA	Q16521	taxon	NA	Salamandrininae	NA	NA
+5	Q319469	Salamandridae	es	NA	Q16521	taxon	NA	Salamandrinae	NA	NA
+5	Q319469	Salamandridae	es	NA	Q16521	taxon	NA	Salamándridos	NA	NA
+5	Q319469	Salamandridae	es	NA	Q16521	taxon	NA	Salamandridos	NA	NA
+5	Q319469	Salamandridae	es	NA	Q16521	taxon	NA	Salamándrido	NA	NA
+5	Q319469	Salamandridae	es	NA	Q16521	taxon	NA	Salamandrido	NA	NA
+5	Q319469	Salamandridae	es	NA	Q16521	taxon	NA	Pleurodelinae	NA	NA

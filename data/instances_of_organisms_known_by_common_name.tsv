@@ -1,0 +1,217 @@
+entity	label	description	group	group_label	different_from	different_from_label
+Q616302	watermelon snow		Q2583205	Chlamydomonas nivalis	NA	
+Q645199	Red kuri squash		Q165308	pumpkin	NA	
+Q957750	bindweed		Q190903	herbaceous plant	NA	
+Q1026228	rattan palms		Q14080	Arecaceae	NA	
+Q1588333	Lotus		Q468996	Nelumbo lutea	NA	
+Q1588333	Lotus		Q16528	Nelumbo nucifera	NA	
+Q2189969	Spider crab		Q280949	Majoidea	NA	
+Q2750918	feral horse		Q26644764	Equus ferus caballus	NA	
+Q2750918	feral horse		Q10758650	Equus caballus	NA	
+Q2932478	NA		Q15548309	parrot	NA	
+Q2940109	NA		Q666222	Thraupidae	NA	
+Q2957706	NA		Q5113	bird	NA	
+Q2998809	Waz couleuvre		Q170713	grass snake	NA	
+Q3060012	egret		Q18789	Ardeidae	NA	
+Q3116821	Grive		Q26050	Turdidae	NA	
+Q3116925	Gurnard		Q2703368	Prionotus	NA	
+Q3116925	Gurnard		Q607603	piper gurnard	NA	
+Q3120530	Guillemot		Q28294	Alcidae	Q24698499	Guillemot
+Q3241272	Toadflax		Q1748235	Plantaginaceae	NA	
+Q3259077	NA		Q5113	bird	NA	
+Q3281200	Tent caterpillar		Q10790185	Malacosoma	NA	
+Q3295856	NA		Q26617	Apodidae	NA	
+Q3325437	NA		Q5113	bird	NA	
+Q3363288	Paradisier		Q25341	Passeriformes	NA	
+Q3473531	NA		Q903316	Anatini	NA	
+Q3535546	NA		Q428243	Cancer	NA	
+Q3540783	Troque		Q4867740	Gastropoda	NA	
+Q3589095	Sparrowhawk		Q188737	Accipiter	NA	
+Q3916915	dormouse		Q108235	Gliridae	NA	
+Q3917144	Domeykosaurus		Q138074	Atacamatitan	NA	
+Q4779023	NA		Q673823	Adiantum	NA	
+Q4801985	NA		Q7367	Culicidae	NA	
+Q6825761	Mexican dace		Q307718	Evarra bustamantei	NA	
+Q8021345	Olw		Q25222	owl	Q1076751	Q1076751
+Q11065036	Bedla		Q11723904	Sericeomyces	NA	
+Q11065036	Bedla		Q1300898	Leucocoprinus	NA	
+Q11065036	Bedla		Q1297274	Leucoagaricus	NA	
+Q11065036	Bedla		Q1090886	Lepiota	NA	
+Q11065036	Bedla		Q606322	Cystolepiota	NA	
+Q11065036	Bedla		Q606310	Chamaemyces	NA	
+Q11065036	Bedla		Q604880	Chlorophyllum	NA	
+Q11065036	Bedla		Q80469	Echinoderma	NA	
+Q11065036	Bedla		Q19748	Macrolepiota	NA	
+Q11330205	NA		Q44064	Sockeye salmon	NA	
+Q11345018	NA		Q56883741	Rhododendron pentaphyllum var. nikoense	NA	
+Q11345018	NA		Q16692333	Rhododendron albrechtii	NA	
+Q11345018	NA		Q2193897	Rhododendron quinquefolium	NA	
+Q12261861	NA		Q215185	Scombridae	NA	
+Q12498168	NA		Q132419	Shorea	NA	
+Q14321566	NA		Q1723123	Samaridae	NA	
+Q14321566	NA		Q647087	Pleuronectidae	NA	
+Q15102622	Chrysantheme		Q25400	Asteraceae	NA	
+Q16032815	Bubale		Q25894	antelope	NA	
+Q17323028	Krill		Q29498	Euphausiacea	NA	
+Q18465776	NA		Q5240255	Anableps anableps	NA	
+Q18465776	NA		Q2423213	Anableps microlepis	NA	
+Q18499918	NA		Q15585877	Trimezia juncifolia	NA	
+Q18499918	NA		Q7842228	Trimezia martinicensis	NA	
+Q20659552	Cercopiteco		Q182968	Cercopithecidae	NA	
+Q22287050	Waitomo frog		Q3229209	Leiopelma waitomoensis	NA	
+Q23925140	Bramble		Q3314483	fruit	NA	
+Q23925140	Bramble		Q602740	Rubus	NA	
+Q25618443	NA		Q484447	Vigna radiata	NA	
+Q25618443	NA		Q369447	Vigna mungo	NA	
+Q52707770	Tarantula hawk		Q10326375	tarantula hawk	NA	
+Q56023350	turtle		Q223044	Testudines	NA	
+Q5	human	common name of Homo sapiens, unique extant species of the genus Homo	Q15978631	Homo sapiens	Q95074	fictional character
+Q5	human	common name of Homo sapiens, unique extant species of the genus Homo	Q3238275	Homo sapiens sapiens	Q95074	fictional character
+Q5	human	common name of Homo sapiens, unique extant species of the genus Homo	Q171283	Homo	Q95074	fictional character
+Q5	human	common name of Homo sapiens, unique extant species of the genus Homo	Q15978631	Homo sapiens	Q2472587	people
+Q5	human	common name of Homo sapiens, unique extant species of the genus Homo	Q3238275	Homo sapiens sapiens	Q2472587	people
+Q5	human	common name of Homo sapiens, unique extant species of the genus Homo	Q171283	Homo	Q2472587	people
+Q144	dog	domestic animal	Q26972265	Canis lupus familiaris	NA	
+Q144	dog	domestic animal	Q20717272	Canis familiaris	NA	
+Q146	house cat	domesticated species of feline	Q20980826	Felis catus	NA	
+Q780	chicken	domesticated fowl, primarily a source of food	Q29533959	Gallus gallus domesticus	NA	
+Q830	cattle	domesticated form of Aurochs	Q20747726	Bos indicus	NA	
+Q830	cattle	domesticated form of Aurochs	Q20747712	Bos taurus taurus	NA	
+Q830	cattle	domesticated form of Aurochs	Q20747334	Bos taurus	NA	
+Q830	cattle	domesticated form of Aurochs	Q20747320	Bos primigenius taurus	NA	
+Q830	cattle	domesticated form of Aurochs	Q46889	Bos primigenius indicus	NA	
+Q830	cattle	domesticated form of Aurochs	Q20747712	Bos taurus taurus	NA	
+Q1367	monkey	"animal of the ""higher primates"" (the simians), but excluding the apes"	Q21684957	Anthropoidea	Q5452918	Simiiformes
+Q1367	monkey	"animal of the ""higher primates"" (the simians), but excluding the apes"	Q7380	Primates	Q5452918	Simiiformes
+Q1367	monkey	"animal of the ""higher primates"" (the simians), but excluding the apes"	Q237157	Platyrrhini	Q5452918	Simiiformes
+Q1367	monkey	"animal of the ""higher primates"" (the simians), but excluding the apes"	Q182968	Cercopithecidae	Q5452918	Simiiformes
+Q1367	monkey	"animal of the ""higher primates"" (the simians), but excluding the apes"	Q21684957	Anthropoidea	Q12773072	Opice
+Q1367	monkey	"animal of the ""higher primates"" (the simians), but excluding the apes"	Q7380	Primates	Q12773072	Opice
+Q1367	monkey	"animal of the ""higher primates"" (the simians), but excluding the apes"	Q237157	Platyrrhini	Q12773072	Opice
+Q1367	monkey	"animal of the ""higher primates"" (the simians), but excluding the apes"	Q182968	Cercopithecidae	Q12773072	Opice
+Q2102	snake	wiggling animal without legs	Q25537662	Serpentes	Q651012	Viperinae
+Q2102	snake	wiggling animal without legs	Q25537662	Serpentes	Q25537662	Serpentes
+Q2934	goat	domesticated mammal raised primarily for its milk	Q45320358	Capra hircus	NA	
+Q2934	goat	domesticated mammal raised primarily for its milk	Q12404854	Capra aegagrus hircus	NA	
+Q7368	sheep	domesticated animal	Q29350771	Ovis aries	NA	
+Q7368	sheep	domesticated animal	Q22073013	Ovis orientalis aries	NA	
+Q145201	Weasel	common name of some mammals	Q28521	Mustela	Q46600415	polecat
+Q171446	coral	colony of marine invertebrates	Q28524	Anthozoa	Q28524	Anthozoa
+Q190294	mouflon	common name	Q378080	Ovis orientalis	NA	
+Q208342	kite	bird of prey	Q25510	Accipitridae	NA	
+Q358685	wild bees	common name	Q7391	Anthophila	NA	
+Q623169	wallaby	common name of small- or mid-sized macropods found in Australia and New Guinea	Q23193	Macropodidae	NA	
+Q651244	Coral snake	common name	Q2075952	Micrurus	NA	
+Q848706	domesticated turkey	common name	Q26844	Meleagris gallopavo	NA	
+Q1478717	fan palm	common name	Q14848242	Palmae	NA	
+Q1478717	fan palm	common name	Q14080	Arecaceae	NA	
+Q1568770	Australian feral camel	common name for some mammals	Q132922	Bactrian camel	NA	
+Q1568770	Australian feral camel	common name for some mammals	Q71516	dromedary	NA	
+Q1865281	whale	various marine mammals of the order Cetacea	Q160	Cetacea	NA	
+Q2092297	eagle	large carnivore bird	Q25510	Accipitridae	NA	
+Q2428354	NA	informal group of plants	Q1762112	Pennisetum	NA	
+Q2428354	NA	informal group of plants	Q1433037	Pennisetum alopecuroides	NA	
+Q2488588	Kestrel	small  bird of prey	Q43489	Falcon	Q2983588	Q2983588
+Q2488588	Kestrel	small  bird of prey	Q43489	Falcon	Q31930830	Kestrel
+Q2751034	mouse	vernacular name for species from the family Muridae	Q25916	Muridae	NA	
+Q2796766	salmon	subfamily of fish in the trout family	Q15504328	Salmoninae	NA	
+Q7150699	hemp	low-THC Cannabis plant	Q26726	Cannabis sativa	NA	
+Q7360490	scallop	common name for several shellfish	Q1757231	Pecten jacobaeus	NA	
+Q7360490	scallop	common name for several shellfish	Q1249634	Pecten maximus	NA	
+Q7502875	Shoveler	group of ducks	Q27725	Anatinae	NA	
+Q8064278	makarel	pelagic fish	Q215185	Scombridae	NA	
+Q9660264	Boga	paraphyletic group of fish	Q35047	Cyprinidae	NA	
+Q11302305	conifer	common name	Q16050271	Coniferopsida	NA	
+Q11302305	conifer	common name	Q14107023	Coniferales	NA	
+Q11302305	conifer	common name	Q9849989	Coniferae	NA	
+Q11302305	conifer	common name	Q1329304	Pinopsida	NA	
+Q11302305	conifer	common name	Q132825	Pinophyta	NA	
+Q7378	elephant	trunk-bearing large mammal	Q2372824	Elephantidae	NA	
+Q7378	elephant	trunk-bearing large mammal	Q591305	Indian elephant	NA	
+Q7378	elephant	trunk-bearing large mammal	Q36557	African bush elephant	NA	
+Q8329	parakeet	small to medium sized species of parrot	Q31431	Psittaciformes	Q15548309	parrot
+Q8331	fox	omnivorous mammal in the Canidae family	Q25324	Canidae	Q30223	Vulpini
+Q8331	fox	omnivorous mammal in the Canidae family	Q25324	Canidae	Q185194	Vulpes
+Q8331	fox	omnivorous mammal in the Canidae family	Q25324	Canidae	Q1453033	Rena
+Q32789	zebra	black and white striped animals in the horse family	Q245305	plains zebra	NA	
+Q32789	zebra	black and white striped animals in the horse family	Q243213	Mountain zebra	NA	
+Q32789	zebra	black and white striped animals in the horse family	Q219565	Grévy's zebra	NA	
+Q34384	Swan	large water bird	Q29564928	Cygnus	NA	
+Q34384	Swan	large water bird	Q25402	Cygnus olor	NA	
+Q2925879	pike [?]	common name for a group of fishes	Q191674	Esox	NA	
+Q2925879	pike [?]	common name for a group of fishes	Q152	fish	NA	
+Q2984084	colobe	French vernacular name designating paraphyletic group of monkeys	Q1367	monkey	NA	
+Q3091399	dandelion	common name of several plants	Q30024	Taraxacum	NA	
+Q3091399	dandelion	common name of several plants	Q25400	Asteraceae	NA	
+Q3112866	gull	seabirds of the family Laridae	Q27589	Laridae	NA	
+Q3469592	salamander	animal	Q319469	Salamandridae	NA	
+Q3535557	turtledove	common name for certain genuses of pigeon	Q10856	pigeon	NA	
+Q3537778	donkey	equine with long ears	Q19829417	Equus asinus	NA	
+Q3537778	donkey	equine with long ears	Q19707	Equus africanus asinus	NA	
+Q3561017	viscacha	rodent	Q1195501	Lagidium	NA	
+Q3561017	viscacha	rodent	Q1162447	Lagostomus maximus	NA	
+Q3711329	wolf	vernacular name referring to several canine species	Q28196316	Canis rufus	Q149892	Canis
+Q3711329	wolf	vernacular name referring to several canine species	Q677746	Canis lupus lycaon	Q149892	Canis
+Q3711329	wolf	vernacular name referring to several canine species	Q188957	Canis simensis	Q149892	Canis
+Q3711329	wolf	vernacular name referring to several canine species	Q18498	Canis lupus	Q149892	Canis
+Q3736439	duck	common name for many species in the bird family Anatidae	Q7556	Anatidae	NA	
+Q5070208	kangaroo	сommon name of family of marsupials	Q174322	Macropus	Q174322	Macropus
+Q5070208	kangaroo	сommon name of family of marsupials	Q23193	Macropodidae	Q174322	Macropus
+Q5990985	flying mammals	common name	Q7377	mammal	NA	
+Q6604812	red mullet	common name of different fishes	Q152	fish	NA	
+Q31862308	penguin	flightless bird that walks upright	Q9147	Spheniscidae	NA	
+Q32780387	NA	common name of the cinnamon tree and related trees	Q370239	Cinnamomum verum	NA	
+Q32780387	NA	common name of the cinnamon tree and related trees	Q27282	Cinnamomum	NA	
+Q32945370	turtle	animal with shell	Q223044	Testudines	NA	
+Q33036816	oak	deciduous tree	Q165145	Quercus robur	NA	
+Q33036816	oak	deciduous tree	Q12004	Quercus	NA	
+Q35417711	olive tree	mediterranean tree	Q37083	Olea europaea	NA	
+Q40458125	lily	popular flower	Q5194627	Lilium	NA	
+Q43604020	skunk	common name of mammals in the family Mephitidae	Q83244	Mephitidae	NA	
+Q43730466	rat	widespread pest animal	Q184224	Rattus norvegicus	NA	
+Q43730466	rat	widespread pest animal	Q106133	Rattus rattus	NA	
+Q44514058	sea snake	legless reptiles living in the sea	Q44512085	Hydrophiidae	NA	
+Q44514058	sea snake	legless reptiles living in the sea	Q11753180	Laticaudinae	NA	
+Q44514058	sea snake	legless reptiles living in the sea	Q460286	Hydrophiinae	NA	
+Q45417383	linden tree	popular deciduous tree	Q127849	Tilia	NA	
+Q46600415	polecat	common name for several mammals	Q27888	Mustelinae	NA	
+Q48385308	bed bug	parasitic insects	Q940337	Cimex lectularius	NA	
+Q48995566	Meadowlark	group of birds	Q21953133	Leistes	NA	
+Q48995566	Meadowlark	group of birds	Q1431050	Sturnella	NA	
+Q54269789	grizzly bear	common name for North American bear	Q36341	Ursus arctos	NA	
+Q55406557	pelican	iconic water bird	Q19413	Pelecanus	NA	
+Q55950732	button spider	common name in Southern Africa for spiders in the genus Latrodectus	Q385932	Latrodectus	NA	
+Q56282003	goby	common name of fish	Q4468	Gobiidae	NA	
+Q11387402	teal	one of a group of duck species	Q10791583	Marmaronetta	NA	
+Q11387402	teal	one of a group of duck species	Q214264	Anas	NA	
+Q11946202	butterfly	insect of the order Lepidoptera	Q28319	Lepidoptera	Q28319	Lepidoptera
+Q12020959	shelduck-sheldgoose group	group of ducks	Q21153	Tadorninae	NA	
+Q12043123	hobbies and relatives	group of falcons	Q43489	Falcon	NA	
+Q12058790	grouse	group of birds	Q201240	Tetraoninae	NA	
+Q13435107	storks	group of birds	Q28507	Ciconiidae	NA	
+Q14468784	coca leaf	drug (its sources, history, uses, etc))	Q158018	Erythroxylum coca	Q754526	Coca
+Q15091732	Hawaiian lobelioids	group of plants within bellflower family	Q155802	Campanulaceae	NA	
+Q15548309	parrot	popular bird	Q31431	Psittaciformes	Q8329	parakeet
+Q17116033	Towhee	common name of birds in Pipilo and Melozone	Q1080266	Melozone	NA	
+Q17116033	Towhee	common name of birds in Pipilo and Melozone	Q613202	Pipilo	NA	
+Q17121454	sea apple	non-taxonomic group of sea cucumbers	Q17135566	Paracucumaria	NA	
+Q17121454	sea apple	non-taxonomic group of sea cucumbers	Q2265800	Pseudocolochirus	NA	
+Q18915461	kite	group of raptors	Q21281049	Milvinae	NA	
+Q18915461	kite	group of raptors	Q1121714	Elaninae	NA	
+Q29001815	gazelle	fast slender grazing mammal in Africa	Q2567514	Nanger	Q190858	Gazella
+Q29001815	gazelle	fast slender grazing mammal in Africa	Q924023	Antilopini	Q190858	Gazella
+Q29001815	gazelle	fast slender grazing mammal in Africa	Q649894	Eudorcas	Q190858	Gazella
+Q29001815	gazelle	fast slender grazing mammal in Africa	Q190858	Gazella	Q190858	Gazella
+Q29582371	palm tree	tropical tree	Q14848242	Palmae	NA	
+Q29582371	palm tree	tropical tree	Q14080	Arecaceae	NA	
+Q29582371	palm tree	tropical tree	Q13187	Cocos nucifera	NA	
+Q29838690	deer	animal, often with antlers	Q79794	Cervus elaphus	NA	
+Q29838690	deer	animal, often with antlers	Q23390	Cervidae	NA	
+Q29994594	willow	tree in temperate regions	Q156918	Salix alba	NA	
+Q29994594	willow	tree in temperate regions	Q36050	Salix	NA	
+Q30090244	bear	large and dangerous, yet cuddly-looking animal	Q36341	Ursus arctos	NA	
+Q30090244	bear	large and dangerous, yet cuddly-looking animal	Q11788	Ursidae	NA	
+Q30345409	tulip	popular flower	Q93201	Tulipa	NA	
+Q30456678	poplar	temperate tree	Q149622	Populus ×canadensis	NA	
+Q30456678	poplar	temperate tree	Q147064	Populus nigra	NA	
+Q30456678	poplar	temperate tree	Q25356	Populus	NA	
