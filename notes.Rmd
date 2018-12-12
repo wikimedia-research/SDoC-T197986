@@ -180,7 +180,7 @@ taxons %>%
   select(item, description, aliases, taxon_common_names) %>%
   kable(escape = FALSE, caption = "Taxons on Wikidata",
         col.names = c("Item", "Description", "Alias(es)", "Taxon common name(s)")) %>%
-  kable_styling()
+  kable_styling(bootstrap_options = "striped")
 ```
 
 When the items are indexed, the index includes labels (if any), descriptions (if any), aliases (if any), and any values of statements which are plain text or Q-items. So if an item is, say, a person who is an instance of (P31) of human (Q5), then their index includes "P31=Q5" but *not* that they're a "human". However, if the value is plain text (e.g. taxon common name), then that gets included in the index and can be searched for. For example, Wikimedia Foundation, Inc. ([Q180](https://www.wikidata.org/wiki/Q180)) has a statement for property "IPv4 routing prefix" ([P3761](https://www.wikidata.org/wiki/Property:P3761)) so if one does a [full-text search for "198.35.26.0/23"](https://www.wikidata.org/w/index.php?search=198.35.26.0%2F23&title=Special%3ASearch&fulltext=1) (the value currently in that statement), WMF is the first result listed.
@@ -211,7 +211,7 @@ taxon_completeness %>%
   mutate(prop = sprintf("%.3f%%", 100 * n / sum(n))) %>%
   kable(escape = FALSE, caption = "English info completeness of taxons on Wikidata",
         col.names = c("Fields available for a taxon", "Info available (in English)", "Items in dataset", "Proportion of dataset")) %>%
-  kable_styling()
+  kable_styling(bootstrap_options = "striped")
 ```
 
 And, conversely, the following missingness statistics:
@@ -226,7 +226,7 @@ taxon_completeness %>%
   mutate(prop = sprintf("%.3f%%", 100 * n / sum(n))) %>%
   kable(escape = FALSE, caption = "English info missingness of taxons on Wikidata",
         col.names = c("Fields NOT available for a taxon", "Info NOT available (in English)", "Items in dataset", "Proportion of dataset")) %>%
-  kable_styling()
+  kable_styling(bootstrap_options = "striped")
 ```
 
 Those are *combinations* of missing fields. The following are per-field completeness & missingness statistics:
@@ -243,7 +243,7 @@ info_completeness %>%
   kable(col.names = c("Information a taxon item may have", "How many have a value (in English)", "How many do NOT have a value (in English)"),
         caption = sprintf("English completeness of items among a subset of %s taxons", compress(nrow(taxons))),
         align = c("l", "r", "r")) %>%
-  kable_styling("striped")
+  kable_styling(bootstrap_options = "striped")
 ```
 
 Considering that the collected dataset *only* included taxons which had at least one alias or at least one taxon common name, the missingness of those two items -- both of which aid a lot in search -- is rather concerning.
@@ -302,7 +302,7 @@ commons %>%
 As before, we can also look at combinations of missing fields to determine how many items would be easily found by searching (e.g. an item which has a label, a description, and an alias would be more likely to be found by someone looking for it than an item with only, say, a label):
 
 ```{r}
-commons %>%
+commons_completeness <- commons %>%
   transmute(
     item = item,
     label = !is.na(label),
@@ -317,9 +317,12 @@ commons %>%
   group_by(item) %>%
   summarize(n_has = n(), has = paste0(has, collapse = ", ")) %>%
   count(n_has, has) %>%
-  arrange(desc(n)) %>%
-  mutate(prop = sprintf("%.2f%%", 100 * n / sum(n))) %>%
+  arrange(desc(n_has), desc(n)) %>%
+  mutate(prop = sprintf("%.2f%%", 100 * n / sum(n)))
+commons_completeness %>%
+  dplyr::select(-n_has) %>%
   kable(escape = FALSE, caption = "English information completeness of 'group of organisms known by one particular common name' instances on Wikidata",
-        col.names = c("Fields available for an item", "Info available (in English)", "Items in dataset", "Proportion of dataset")) %>%
-  kable_styling()
+        col.names = c("Fields of information available (in English)", "Items on Wikidata", "Proportion among all such instances")) %>%
+  kable_styling(bootstrap_options = "striped") %>%
+  group_rows(index = auto_index(commons_completeness$n_has), group_label = "Fields available for an item")
 ```
